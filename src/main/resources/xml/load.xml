@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Load testing" parallel="methods" thread-count="2000">
+
+
+    <test name="Emulate Charts Refreshing Load VPV">
+        <classes>
+            <class name="tests.load.LoadChartsRefreshingVPV"/>
+        </classes>
+    </test>
+
+    <test name="Emulate Charts Refreshing Load GPV">
+        <classes>
+            <class name="tests.load.LoadChartsRefreshingGPV"/>
+        </classes>
+    </test>
+
+    <test name="Emulate Charts Refreshing Load GPV 100 Equips and Dashboards">
+        <classes>
+            <class name="tests.load.LoadChartsRefreshingGPV100"/>
+        </classes>
+    </test>
+
+    <test name="Emulate Charts Refreshing Load GPV Burst">
+        <classes>
+            <class name="tests.load.LoadChartsRefreshingGPVBurst"/>
+        </classes>
+    </test>
+
+    <test name="Emulate Notification rule CRUD Load">
+        <classes>
+            <class name="tests.load.LoadNotificationRulesCRUD"/>
+        </classes>
+    </test>
+
+    <test name="Emulate CRUD Stress">
+        <classes>
+            <class name="tests.load.StressNotificationRulesCRUD"/>
+        </classes>
+    </test>
+</suite>
+

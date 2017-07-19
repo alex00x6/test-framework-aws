@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="API tests" parallel="tests" thread-count="2000">
+    <test name="Notification Rules VPV/GPV">
+        <classes>
+            <class name="tests.api.NotificationRulesVPVNegative"/>
+            <class name="tests.api.NotificationRulesGPV"/>
+            <class name="tests.api.NotificationRulesVPV"/>
+        </classes>
+    </test>
+
+    <test name="Equipment tests">
+        <classes>
+            <class name="tests.api.EquipmentTests"/>
+        </classes>
+    </test>
+    <test name="Global Settings">
+        <classes>
+            <class name="tests.api.SettingsTests"/>
+        </classes>
+    </test>
+    <test name="Skedler Reports">
+        <classes>
+            <class name="tests.api.ReportsTest"/>
+        </classes>
+    </test>
+
+    <test name="Dashboards">
+        <classes>
+            <class name="tests.api.DashboardTests"/>
+        </classes>
+    </test>
+</suite>

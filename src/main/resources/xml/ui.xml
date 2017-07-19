@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="UI tests">
+    <!--<test name="Admin Role Chrome Test">-->
+    <!--<classes>-->
+    <!--<class name="tests.ui.Admin_Role_Chrome"/>-->
+    <!--</classes>-->
+    <!--</test>-->
+
+    <test name="AbortAlarm widget on VPV dashboard tests suite.">
+        <classes>
+            <class name="tests.ui.AlarmAbortWidgetVPV"/>
+        </classes>
+    </test>
+
+    <!--<test name="Alarm widget on GPV dashboard tests suite.">-->
+        <!--<classes>-->
+            <!--<class name="tests.ui.AlarmWidgetGPV"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+    <!--<test name="Dashboard CRUD tests suite.">-->
+        <!--<classes>-->
+            <!--<class name="tests.ui.DashboardsCRUD"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+    <!--<test name="Global Settings tests suite.">-->
+        <!--<classes>-->
+            <!--<class name="tests.ui.GlobalSettingsTest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+    <!--<test name="Login tests suite.">-->
+        <!--<classes>-->
+            <!--<class name="tests.ui.Login"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+    <!--<test name="My Info tests suite.">-->
+        <!--<classes>-->
+            <!--<class name="tests.ui.MyInfoTest"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+    <!--<test name="Notification Rule VPV tests suite.">-->
+        <!--<classes>-->
+            <!--<class name="tests.ui.NotificationRulesVPV"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+    <!--<test name="Notification Rule GPV tests suite.">-->
+        <!--<classes>-->
+            <!--<class name="tests.ui.NotificationRulesGPV"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+
+    <!--<test name="Notification Rule ICT tests suite.">-->
+        <!--<classes>-->
+            <!--<class name="tests.ui.NotificationRulesICT"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+    <!--<test name="Permission based test suite.">-->
+        <!--<classes>-->
+            <!--<class name="tests.ui.PermissionBased"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+    <!--<test name="Registration and Approval test suite.">-->
+        <!--<classes>-->
+            <!--<class name="tests.ui.RegistrationAndApproval"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+    <!--<test name="Reports test suite.">-->
+        <!--<classes>-->
+            <!--<class name="tests.ui.ReportTests"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+</suite>
+
