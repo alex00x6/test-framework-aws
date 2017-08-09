@@ -7,11 +7,11 @@
     <!--</classes>-->
     <!--</test>-->
 
-    <test name="AbortAlarm widget on VPV dashboard tests suite.">
-        <classes>
-            <class name="tests.ui.AlarmAbortWidgetVPV"/>
-        </classes>
-    </test>
+    <!--<test name="AbortAlarm widget on VPV dashboard tests suite.">-->
+        <!--<classes>-->
+            <!--<class name="tests.ui.AlarmAbortWidgetVPV"/>-->
+        <!--</classes>-->
+    <!--</test>-->
 
     <!--<test name="Alarm widget on GPV dashboard tests suite.">-->
         <!--<classes>-->
@@ -43,24 +43,24 @@
         <!--</classes>-->
     <!--</test>-->
 
-    <!--<test name="Notification Rule VPV tests suite.">-->
-        <!--<classes>-->
-            <!--<class name="tests.ui.NotificationRulesVPV"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Notification Rule VPV tests suite.">
+        <classes>
+            <class name="tests.ui.NotificationRulesVPV"/>
+        </classes>
+    </test>
 
-    <!--<test name="Notification Rule GPV tests suite.">-->
-        <!--<classes>-->
-            <!--<class name="tests.ui.NotificationRulesGPV"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Notification Rule GPV tests suite.">
+        <classes>
+            <class name="tests.ui.NotificationRulesGPV"/>
+        </classes>
+    </test>
 
 
-    <!--<test name="Notification Rule ICT tests suite.">-->
-        <!--<classes>-->
-            <!--<class name="tests.ui.NotificationRulesICT"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Notification Rule ICT tests suite.">
+        <classes>
+            <class name="tests.ui.NotificationRulesICT"/>
+        </classes>
+    </test>
 
     <!--<test name="Permission based test suite.">-->
         <!--<classes>-->
@@ -74,10 +74,16 @@
         <!--</classes>-->
     <!--</test>-->
 
-    <!--<test name="Reports test suite.">-->
-        <!--<classes>-->
-            <!--<class name="tests.ui.ReportTests"/>-->
-        <!--</classes>-->
-    <!--</test>-->
+    <test name="Reports test suite.">
+        <classes>
+            <class name="tests.ui.ReportTests"/>
+        </classes>
+    </test>
+
+    <test name="Templates test suite.">
+        <classes>
+            <class name="tests.ui.TemplatesTest"/>
+        </classes>
+    </test>
 </suite>
 

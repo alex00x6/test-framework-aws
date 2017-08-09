@@ -6,11 +6,10 @@ import com.jayway.restassured.response.Response;
  * Created by user on 18.04.2017.
  */
 public class GatlingReportAdapter {
+    private static ThreadLocal<Long> threadStartTime = new ThreadLocal<>();
     private final String reportName = "RecordedSimulation";
     private final String reportName1 = "Simulation";
     private final String reportName2 = "Gatling launch";
-
-    private static ThreadLocal<Long> threadStartTime = new ThreadLocal<>();
 
     public void gatlingInfoPrintUserStart() {
         long thread = Thread.currentThread().getId();

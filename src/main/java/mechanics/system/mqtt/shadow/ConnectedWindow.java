@@ -26,15 +26,14 @@ import java.util.Random;
  */
 public class ConnectedWindow extends AWSIotDevice {
 
+    @AWSIotDeviceProperty
+    private boolean windowOpen;
+    @AWSIotDeviceProperty
+    private float roomTemperature;
+
     public ConnectedWindow(String thingName) {
         super(thingName);
     }
-
-    @AWSIotDeviceProperty
-    private boolean windowOpen;
-
-    @AWSIotDeviceProperty
-    private float roomTemperature;
 
     public boolean getWindowOpen() {
         // 1. read the window state from the window actuator

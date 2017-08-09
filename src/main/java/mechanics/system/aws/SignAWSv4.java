@@ -108,6 +108,9 @@ public class SignAWSv4 extends RequestSender {
         if (uri.getHost().contains(".es.")) {
             serviceName = "es";
         }
+        if (uri.getHost().contains(".iot.")) {
+            serviceName = "iot";
+        }
 
 
         if (uri.getHost().contains(".us-east-1.")) {

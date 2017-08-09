@@ -12,6 +12,14 @@ import static mechanics.system.constant.EmailInbox.*;
 public class JSONManagerAPI extends JSONHandler {
     private static String thingVpv = AssembledEquipments.equipmentVpv;
     private static String thingGpv = AssembledEquipments.equipmentGpv;
+    private String reportTemplateIdVPV_Daily = "Vacuum-Pump-Vibration-Report---Daily";
+    private String reportTemplateIdVPV_Weekly = "Vacuum-Pump-Vibration-Report---Weekly";
+    private String reportTemplateIdVPV_Monthly = "Vacuum-Pump-Vibration-Report---Monthly";
+    private String reportTemplateIdGPV_Monthly = "GPV-Smart-Sensor-Report-15-minutes-activity";
+    private String reportTemplateNameVPV_Daily = "Vacuum-Pump-Vibration-Report-List---Daily";
+    private String reportTemplateNameVPV_Weekly = "Vacuum-Pump-Vibration-Report-List---Weekly";
+    private String reportTemplateNameVPV_Monthly = "Vacuum-Pump-Vibration-Report-List---Monthly";
+    private String reportTemplateNameGPV_Monthly = "GPV-Smart-Sensor-Report-List-15-minutes";
 
     @Step("Creating JSON for Abnormal Vibration rule,channel: Any, Abort.")
     public String jsonRuleAbnormalVibrationVPVAnyAbort() {
@@ -285,7 +293,6 @@ public class JSONManagerAPI extends JSONHandler {
         ).toString();
     }
 
-
     public String jsonEquipmentDisconnectVPV() {
         return equipmentOnOff(thingVpv, false);
     }
@@ -301,16 +308,6 @@ public class JSONManagerAPI extends JSONHandler {
     public String jsonEquipmentConnectGPV() {
         return equipmentOnOff(thingGpv, true);
     }
-
-    private String reportTemplateIdVPV_Daily = "Vacuum-Pump-Vibration-Report---Daily";
-    private String reportTemplateIdVPV_Weekly = "Vacuum-Pump-Vibration-Report---Weekly";
-    private String reportTemplateIdVPV_Monthly = "Vacuum-Pump-Vibration-Report---Monthly";
-    private String reportTemplateIdGPV_Monthly = "GPV-Smart-Sensor-Report-15-minutes-activity";
-
-    private String reportTemplateNameVPV_Daily = "Vacuum-Pump-Vibration-Report-List---Daily";
-    private String reportTemplateNameVPV_Weekly = "Vacuum-Pump-Vibration-Report-List---Weekly";
-    private String reportTemplateNameVPV_Monthly = "Vacuum-Pump-Vibration-Report-List---Monthly";
-    private String reportTemplateNameGPV_Monthly = "GPV-Smart-Sensor-Report-List-15-minutes";
 
     public String JSONReportCreateVPV_Daily() {
         return reportCreate(reportTemplateIdVPV_Daily, thingVpv, reportTemplateNameVPV_Daily).toString();

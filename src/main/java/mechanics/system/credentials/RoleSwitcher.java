@@ -6,8 +6,8 @@ import java.util.List;
  * Created by Alex Storm on 05.06.2017.
  */
 public class RoleSwitcher {
-    private static String currentRole;
     public static List<String> roles;
+    private static String currentRole;
     private static int counter = 0;
 
     public static void initializeCurrentUser() {

@@ -31,16 +31,6 @@ import java.util.Properties;
 public class SampleUtil {
     private static final String PropertyFile = "system.aws-iot-sdk-samples.properties";
 
-    public static class KeyStorePasswordPair {
-        public KeyStore keyStore;
-        public String keyPassword;
-
-        public KeyStorePasswordPair(KeyStore keyStore, String keyPassword) {
-            this.keyStore = keyStore;
-            this.keyPassword = keyPassword;
-        }
-    }
-
     public static String getConfig(String name) {
         Properties prop = new Properties();
         URL resource = SampleUtil.class.getResource(PropertyFile);
@@ -133,6 +123,16 @@ public class SampleUtil {
         }
 
         return privateKey;
+    }
+
+    public static class KeyStorePasswordPair {
+        public KeyStore keyStore;
+        public String keyPassword;
+
+        public KeyStorePasswordPair(KeyStore keyStore, String keyPassword) {
+            this.keyStore = keyStore;
+            this.keyPassword = keyPassword;
+        }
     }
 
 }

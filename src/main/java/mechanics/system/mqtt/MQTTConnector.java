@@ -6,12 +6,13 @@ import mechanics.system.constant.AssembledUrls;
 import mechanics.system.credentials.RoleSwitcher;
 import mechanics.system.credentials.User;
 import mechanics.system.mqtt.pubSub.TestTopicListener;
+import org.testng.Assert;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 public class MQTTConnector {
-    private String clientEndpoint = AssembledUrls.iotEndpoint;
     private final int connectionRetries = 2;
+    private String clientEndpoint = AssembledUrls.iotEndpoint;
     private AWSIotMqttClient awsIotClient;
 
     public void mqttSubscribe(int openConnectionTimeMs, String topic) {
@@ -145,14 +146,20 @@ public class MQTTConnector {
             }
         } catch (AWSIotException e) {
             e.printStackTrace();
+            awsIotClient = null;
         }
     }
 
     public void mqttPublishToConnected(String topic, String payload) {
-        try {
-            awsIotClient.publish(topic, payload);
-        } catch (AWSIotException e) {
-            e.printStackTrace();
+        if (awsIotClient!=null&&awsIotClient.getConnectionStatus().equals(AWSIotConnectionStatus.CONNECTED)) {
+            try {
+                awsIotClient.publish(topic, payload);
+            } catch (AWSIotException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            Assert.assertTrue(false);
         }
     }
 

@@ -20,10 +20,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 
 public class WebDriverFactory {
+    public static final int webDriverImplicitlyWait = 20;
     private static final String unpackedPrefix = "selenium/";
     private static final String windowsPathPrefix = "src/main/resources/selenium/windows/";
     private static final String linuxPathPrefix = "src/main/resources/selenium/linux/";
-    public static final int webDriverImplicitlyWait = 20;
 
     public static WebDriver createInstance(String browserName, Boolean useGrid) {
         URL hostURL = null;
@@ -37,8 +37,9 @@ public class WebDriverFactory {
 
         DesiredCapabilities cap = DesiredCapabilities.chrome();
 
-        //this is for chrome headless mode, but headless mode will be supported only in chrome 60 on windows OS
+//        this is for chrome headless mode, but headless mode will be supported only in chrome 60 on windows OS
 //        final ChromeOptions chromeOptions = new ChromeOptions();
+//        chromeOptions.addArguments("enable-automation");
 //        chromeOptions.addArguments("--headless");
 //        chromeOptions.addArguments("--disable-gpu");
 //        cap.setCapability(ChromeOptions.CAPABILITY, chromeOptions);

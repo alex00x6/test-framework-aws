@@ -73,7 +73,7 @@ public class WaitsAsserts {
     public boolean elementExistsByXpath(String xpath) {
         WebDriver driver = WebDriverManager.getDriver();
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        boolean exists = driver.findElements(By.xpath(xpath)).size() != 0;
+        boolean exists =  !driver.findElements(By.xpath(xpath)).isEmpty();
         driver.manage().timeouts().implicitlyWait(WebDriverFactory.webDriverImplicitlyWait, TimeUnit.SECONDS);
         return exists;
     }
@@ -99,6 +99,7 @@ public class WaitsAsserts {
             driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
             exists = driver.findElements(By.xpath(xpath)).size() != 0;
             driver.manage().timeouts().implicitlyWait(WebDriverFactory.webDriverImplicitlyWait, TimeUnit.SECONDS);
+            counter++;
         }
     }
 
@@ -157,29 +158,62 @@ public class WaitsAsserts {
 
     public boolean retryingFindClickByXpath(String xpath) {
         WebDriver driver = WebDriverManager.getDriver();
-        Exception exception = null;
+        WebDriverException exception = null;
         boolean result = false;
         int attempts = 0;
-        while (attempts <= 3) {
+        while (!result && attempts <= 5) {
             try {
                 driver.findElement(By.xpath(xpath)).click();
                 result = true;
                 break;
-            } catch (StaleElementReferenceException e) {
-                exception = e;
             } catch (WebDriverException w) {
                 exception = w;
+            } finally {
+                WaitsAsserts.sleep(200);
+                attempts++;
             }
-            try {
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            attempts++;
         }
         if (!result) {
             exception.printStackTrace();
         }
         return result;
+    }
+
+    public boolean retryingFindClickByXpath2(String xpath) {
+        WebDriver driver = WebDriverManager.getDriver();
+        boolean result = false;
+        int attempts = 0;
+        int failedAttempts = 0;
+        while (!result && attempts <= 2) {
+            try{
+                driver.findElement(By.xpath(xpath)).click();
+                result = true;
+                break;
+            }
+            catch (WebDriverException e){
+                result = false;
+                failedAttempts++;
+            }
+            attempts++;
+        }
+        if (attempts!=0 || failedAttempts!=0 || !result) {
+            System.out.println("Attempts: " + attempts);
+            System.out.println("Failed attempts: " + failedAttempts);
+            System.out.println("Result :" + result);
+        }
+        return result;
+    }
+
+    public boolean commonWaitingClick(String xpath) {
+        new JSWaiter().waitUntilJSReady();
+        waitForVisibilityByXpath(xpath);
+        waitForClickableByXpath(xpath);
+        return retryingFindClickByXpath2(xpath);
+    }
+
+    public boolean clickableWaitingClick(String xpath) {
+        new JSWaiter().waitUntilJSReady();
+        waitForClickableByXpath(xpath);
+        return retryingFindClickByXpath2(xpath);
     }
 }

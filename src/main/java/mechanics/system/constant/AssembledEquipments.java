@@ -14,11 +14,16 @@ public class AssembledEquipments {
     public static String equipmentVpvChannel;
     public static String equipmentVpvChartType;
     public static String equipmentVpvData;
-    public static String equipmentItcName1;
-    public static String equipmentItcName2;
-    public static String equipmentItcName3;
-    public static String equipmentItcName4;
-    public static String equipmentItcName5;
+
+    public static String ictId;
+    public static String ictDatastream;
+    public static String ictTopic;
+    public static String ictFgwSimulator;
+    public static String equipmentIctName1;
+    public static String equipmentIctName2;
+    public static String equipmentIctName3;
+    public static String equipmentIctName4;
+    public static String equipmentIctName5;
 
     public void setEquipmentGpvName(String equipmentGpvName) {
         AssembledEquipments.equipmentGpvName = equipmentGpvName;
@@ -29,23 +34,23 @@ public class AssembledEquipments {
     }
 
     public void setEquipmentItcName1(String equipmentItcName1) {
-        AssembledEquipments.equipmentItcName1 = equipmentItcName1;
+        AssembledEquipments.equipmentIctName1 = equipmentItcName1;
     }
 
     public void setEquipmentItcName2(String equipmentItcName2) {
-        AssembledEquipments.equipmentItcName2 = equipmentItcName2;
+        AssembledEquipments.equipmentIctName2 = equipmentItcName2;
     }
 
     public void setEquipmentItcName3(String equipmentItcName3) {
-        AssembledEquipments.equipmentItcName3 = equipmentItcName3;
+        AssembledEquipments.equipmentIctName3 = equipmentItcName3;
     }
 
     public void setEquipmentItcName4(String equipmentItcName4) {
-        AssembledEquipments.equipmentItcName4 = equipmentItcName4;
+        AssembledEquipments.equipmentIctName4 = equipmentItcName4;
     }
 
     public void setEquipmentItcName5(String equipmentItcName5) {
-        AssembledEquipments.equipmentItcName5 = equipmentItcName5;
+        AssembledEquipments.equipmentIctName5 = equipmentItcName5;
     }
 
     public void setEquipmentVpvChartType(String equipmentVpvChartType) {
@@ -74,5 +79,21 @@ public class AssembledEquipments {
 
     public void setEquipmentVpvData(String equipmentVpvData) {
         AssembledEquipments.equipmentVpvData = equipmentVpvData;
+    }
+
+    public void setIctFgwSimulator(String fgwSimulator) {
+        AssembledEquipments.ictFgwSimulator = fgwSimulator;
+    }
+
+    public void setIctTopic(String ictTopic){
+        AssembledEquipments.ictTopic =ictTopic;
+    }
+
+    public void setIctDatastream(String itcDatastream){
+        AssembledEquipments.ictDatastream =itcDatastream;
+    }
+
+    public void setIctId(String ictId) {
+        AssembledEquipments.ictId = ictId;
     }
 }

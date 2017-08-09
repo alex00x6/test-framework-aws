@@ -17,23 +17,29 @@ import org.json.simple.parser.ParseException;
 import javax.net.ssl.SSLContext;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.jayway.restassured.RestAssured.given;
 import static mechanics.system.constant.HTTPMethod.*;
 
 public class RequestSender {
-    private RequestSpecification requestSpecification = null;
-    public Response response = null;
     private static Date startDate = null;
     private static String currentUserRole = null;
+    public Response response = null;
+    protected boolean messagesEnableGatlingReport = false; //should be used with debug messages off (if you want load.gatling reports to work)
 
     //these three booleans controls console output messages
-    protected boolean messagesEnableGatlingReport = true; //should be used with debug messages off (if you want load.gatling reports to work)
+//    protected boolean messagesEnableGatlingReport = true; //should be used with debug messages off (if you want load.gatling reports to work)
+//    protected boolean messagesEnableErrorDebugResponse = false;
+//    protected boolean messagesEnableAllDebugResponse = false;
+//    protected boolean messagesEnableAWSKeys = true;
+//    private boolean messagesReplaceTimeStampsInUrls = true; //should be on, if you want to generate small and nimble load.gatling reports
     protected boolean messagesEnableErrorDebugResponse = false;
-    protected boolean messagesEnableAllDebugResponse = false;
-    protected boolean messagesEnableAWSKeys = true;
-    private boolean messagesReplaceTimeStampsInUrls = true; //should be on, if you want to generate small and nimble load.gatling reports
+    protected boolean messagesEnableAllDebugResponse = true;
+    protected boolean messagesEnableAWSKeys = false;
+    private RequestSpecification requestSpecification = null;
+    private boolean messagesReplaceTimeStampsInUrls = false; //should be on, if you want to generate small and nimble load.gatling reports
 
 
     public RequestSender() {
@@ -67,6 +73,18 @@ public class RequestSender {
             RequestSender requestSender = new RequestSender();
             requestSender.sendAmazonRequest(GET.getValue(), AssembledUrls.authenticationRefresh);
         }
+    }
+
+    private static Map<String, String> defaultHeaders() {
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Connection", "keep-alive");
+        headers.put("Cache-Control", "no-cache");
+        headers.put("Pragma", "no-cache");
+        headers.put("Content-Type", "application/json");
+        headers.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36");
+        headers.put("Accept-Language", "en-US,en;q=0.8");
+        headers.put("Accept-Encoding", "gzip, deflate, sdch, br");
+        return headers;
     }
 
     public RequestSender createEmptyRequestWithHeaders(Map<String, ?> map) {
@@ -225,7 +243,6 @@ public class RequestSender {
         }
     }
 
-
     private void debugInfoPrint(String url) {
         if (messagesEnableErrorDebugResponse || messagesEnableAllDebugResponse) {
             if (response.statusCode() != 200 || response.asString().contains("error") || messagesEnableAllDebugResponse) {
@@ -347,6 +364,42 @@ public class RequestSender {
             case "DELETE":
                 headers = signAWSv4.allHeaders(DELETE.getValue(), url, body);
                 response = createRequestWithHeaders(headers, body).delete(url, print).getResponse();
+                break;
+        }
+        return response;
+    }
+
+    public Response sendRequest(String method, String url) {
+        Map<String, String> headers = defaultHeaders();
+        Response response = null;
+
+        switch (method) {
+            case "GET":
+                response = createEmptyRequestWithHeaders(headers).get(url).getResponse();
+                break;
+            case "OPTIONS":
+                response = createEmptyRequestWithHeaders(headers).options(url).getResponse();
+                break;
+            case "DELETE":
+                response = createEmptyRequestWithHeaders(headers).delete(url).getResponse();
+                break;
+        }
+        return response;
+    }
+
+    public Response sendRequest(String method, String url, String body) {
+        Map<String, String> headers = defaultHeaders();
+        Response response = null;
+
+        switch (method) {
+            case "POST":
+                response = createRequestWithHeaders(headers, body).post(url).getResponse();
+                break;
+            case "PUT":
+                response = createRequestWithHeaders(headers, body).put(url).getResponse();
+                break;
+            case "DELETE":
+                response = createRequestWithHeaders(headers, body).delete(url).getResponse();
                 break;
         }
         return response;

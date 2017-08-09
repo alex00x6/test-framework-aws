@@ -19,10 +19,14 @@ public class Unpack {
             unpackFile("selenium/IEDriverServer32.exe", "/selenium/windows/IEDriverServer32.exe");
             unpackFile("selenium/IEDriverServer64.exe", "/selenium/windows/IEDriverServer64.exe");
             unpackFile("selenium/MicrosoftWebDriver.exe", "/selenium/windows/MicrosoftWebDriver.exe");
+
+            unpackFile("aspectjweaver.jar", "/aspectjweaver.jar");
         }
         if (SystemUtils.IS_OS_LINUX) {
             unpackFile("selenium/chromedriver", "/selenium/linux/chromedriver", true);
             unpackFile("selenium/geckodriver", "/selenium/linux/geckodriver", true);
+
+            unpackFile("aspectjweaver.jar", "/aspectjweaver.jar", true);
         }
         unpackFile("xml/api.xml", "/xml/api.xml");
         unpackFile("xml/apiAuth.xml", "/xml/apiAuth.xml");
@@ -35,6 +39,10 @@ public class Unpack {
         unpackFile("variables/equipments-wstaging.json", "/variables/equipments-wstaging.json");
         unpackFile("variables/s-variables-wstaging.json", "/variables/s-variables-wstaging.json");
         unpackFile("variables/s-variables-dev.json", "/variables/s-variables-dev.json");
+
+        unpackFile("credentials.properties", "/credentials.properties");
+
+        System.out.println("Unpacking completed.");
     }
 
     private void unpackFile(String newFile, String resourceFile) {

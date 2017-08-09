@@ -16,9 +16,9 @@ import java.util.Properties;
  * Created by Alex Storm on 08.06.2017.
  */
 public class Collector {
+    private static final String credentialFile = "credentials.properties";
     private Properties prop = new Properties();
     private InputStream input = null;
-    private static final String credentialFile = "credentials.properties";
 
     void readEmailPassword(String role) {
         try {

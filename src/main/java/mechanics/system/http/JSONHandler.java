@@ -23,6 +23,19 @@ public class JSONHandler extends SignAWSv4 {
     private String thingVpv = AssembledEquipments.equipmentVpv;
     private String thingGpv = AssembledEquipments.equipmentGpv;
 
+    public String getUserIdFromUserList(String jsonString, String email, String role){
+        JSONArray array = parseToJSONArray(jsonString);
+        JSONObject object;
+        String id = null;
+        for (Object anArray : array) {
+            object = (JSONObject) anArray;
+            if (object.get("email").equals(email) && object.get("group").equals(role)) {
+                id = object.get("id").toString();
+            }
+        }
+        return id;
+    }
+
 
     public JsonObject reportCreate(String templateId, String equipment, String name) {
 //        String jsonBody = "{\"templateId\":\"Vacuum-Pump-Vibration-Report---Optimized-for-Printing---Daily\",\"emaillist\":\"vasya.ossystem@gmasill.com\"
@@ -471,4 +484,15 @@ public class JSONHandler extends SignAWSv4 {
         return jsonObject.toString();
     }
 
+    protected String getYieldInPeriod(String json) {
+        JSONObject jsonObject = (JSONObject) parseToJSONObject(json).get("result");
+        return jsonObject.get("yieldInPeriod").toString();
+    }
+
+    protected String getLastYieldPoint(String json){
+        JSONObject jsonObject = (JSONObject) parseToJSONObject(json).get("result");
+        JSONArray yield = (JSONArray) jsonObject.get("yield");
+        JSONObject lastYield = (JSONObject) yield.get(yield.size()-1);
+        return lastYield.get("y").toString();
+    }
 }

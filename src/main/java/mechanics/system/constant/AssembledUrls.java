@@ -23,6 +23,9 @@ public class AssembledUrls {
     public static String chart;
     public static String globalSettings;
 
+    public static String userList;
+    public static String user;
+
     public void assemble() {
         notificationRule = apiUrl + NotificationRule.getValue();
         notificationUnread = apiUrl + NotificationUnread.getValue();
@@ -34,6 +37,9 @@ public class AssembledUrls {
         dashboard = apiUrl + Dashboard.getValue();
         chart = apiUrl + Chart.getValue();
         globalSettings = apiUrl + GlobalSettings.getValue();
+        userList = apiUrl+UserList.getValue();
+        user = apiUrl+User.getValue();
+
     }
 
     public void setApiUrl(String apiUrl) {
@@ -55,5 +61,6 @@ public class AssembledUrls {
     public void setSkedlerEndpoint(String skedlerEndpoint) {
         AssembledUrls.skedlerEndpoint = skedlerEndpoint;
     }
+
 
 }

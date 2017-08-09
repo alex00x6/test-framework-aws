@@ -35,6 +35,65 @@ public class PublishSubscribeSample {
         awsIotClient = client;
     }
 
+    private static void initClient(CommandArguments arguments) {
+        String clientEndpoint = arguments.getNotNull("clientEndpoint", SampleUtil.getConfig("clientEndpoint"));
+        String clientId = arguments.getNotNull("clientId", SampleUtil.getConfig("clientId"));
+
+        String certificateFile = arguments.get("certificateFile", SampleUtil.getConfig("certificateFile"));
+        String privateKeyFile = arguments.get("privateKeyFile", SampleUtil.getConfig("privateKeyFile"));
+        if (awsIotClient == null && certificateFile != null && privateKeyFile != null) {
+            String algorithm = arguments.get("keyAlgorithm", SampleUtil.getConfig("keyAlgorithm"));
+            SampleUtil.KeyStorePasswordPair pair = SampleUtil.getKeyStorePasswordPair(certificateFile, privateKeyFile, algorithm);
+
+            awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, pair.keyStore, pair.keyPassword);
+        }
+
+        if (awsIotClient == null) {
+            String awsAccessKeyId = arguments.get("awsAccessKeyId", SampleUtil.getConfig("awsAccessKeyId"));
+            String awsSecretAccessKey = arguments.get("awsSecretAccessKey", SampleUtil.getConfig("awsSecretAccessKey"));
+            String sessionToken = arguments.get("sessionToken", SampleUtil.getConfig("sessionToken"));
+
+            if (awsAccessKeyId != null && awsSecretAccessKey != null) {
+                awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey,
+                        sessionToken);
+            }
+        }
+
+        if (awsIotClient == null) {
+            throw new IllegalArgumentException("Failed to construct client due to missing certificate or credentials.");
+        }
+    }
+
+    public static void main(String args[]) throws InterruptedException, AWSIotException, AWSIotTimeoutException {
+        String clientEndpoint = "a2awmps9ermju9.iot.us-east-1.amazonaws.com";
+        String clientId = "187e4";
+
+
+        String awsAccessKeyId = "ASIAJTEG4GVPTEV47G3A";
+        String awsSecretAccessKey = "woWVvnvSuaDxEEH7ySl/ID3ivUvkPVeOFdUMj1QY";
+        String sessionToken = "FQoDYXdzELr//////////wEaDBlsIFf114xEt0xI/SLmAxfNWEqhCzO6e7GW5mOHSKfqLpx2pN1om88JQxA3XsQDZMeJVS/iGvd85AIMAI3IS3quiNH2CCx42wpkkGnUuY5rmen5AM9HJXYjIeyxElcZBkoVVIYcMaxpy8HK2a0979nmZnTAFwdp5x0xd9pXO3fYkGM8HrBAhEPikU52O7ktEzo92fp2SxHDlt1YIzyo8obVsNeRM2bO9k0FJQJy53dysfpUCogDlE747/BEKhrR9aOtsIKPP/+/fLF0O1GGql1KJLAXGcD1Q6c/zs+vh7Q+ZukOPv97N84sGb2EMzyki+WVjAIxRLzsnSak1va0OOwK4hfbNQ8Lgk6Wbbhr8KMBF7nSA2U7CCrTrIo+wT4PbTJr4knVRVvHVQMaKAQ9SRX1pukZ9mtNmLlCinPka8z/xAf1ftWmNCuPekdqKG1H95KASWwTwBgFCgfodIZuHFaYpYHWY0GVBFRtlA9nBiJA+YC9xozbRN5TMc0V/lY0Y/So/gCPW2jgkftWwRFvASzWsV6f3qROr0l0BZdJitLPKNUoMzKdRWw99SwVWt0kXjGk4ePxSd2Unwrj6SuB7Ij17EPpBePxCRPiYxZTvk/stzaQxNI/kXgb8qE7so+VJBFimTNC3Ra8iQovW+a40pzQJOq/WSjohb3HBQ==";
+
+
+//        CommandArguments arguments = CommandArguments.parse(args1);
+//        initClient(arguments);
+
+        awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey, sessionToken);
+
+        awsIotClient.connect();
+
+        AWSIotTopic topic = new TestTopicListener(TestTopic, TestTopicQos);
+        awsIotClient.subscribe(topic, true);
+
+        Thread blockingPublishThread = new Thread(new BlockingPublisher(awsIotClient));
+        Thread nonBlockingPublishThread = new Thread(new NonBlockingPublisher(awsIotClient));
+
+        blockingPublishThread.start();
+        nonBlockingPublishThread.start();
+
+        blockingPublishThread.join();
+        nonBlockingPublishThread.join();
+    }
+
     public static class BlockingPublisher implements Runnable {
         private final AWSIotMqttClient awsIotClient;
 
@@ -93,65 +152,6 @@ public class PublishSubscribeSample {
                 }
             }
         }
-    }
-
-    private static void initClient(CommandArguments arguments) {
-        String clientEndpoint = arguments.getNotNull("clientEndpoint", SampleUtil.getConfig("clientEndpoint"));
-        String clientId = arguments.getNotNull("clientId", SampleUtil.getConfig("clientId"));
-
-        String certificateFile = arguments.get("certificateFile", SampleUtil.getConfig("certificateFile"));
-        String privateKeyFile = arguments.get("privateKeyFile", SampleUtil.getConfig("privateKeyFile"));
-        if (awsIotClient == null && certificateFile != null && privateKeyFile != null) {
-            String algorithm = arguments.get("keyAlgorithm", SampleUtil.getConfig("keyAlgorithm"));
-            SampleUtil.KeyStorePasswordPair pair = SampleUtil.getKeyStorePasswordPair(certificateFile, privateKeyFile, algorithm);
-
-            awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, pair.keyStore, pair.keyPassword);
-        }
-
-        if (awsIotClient == null) {
-            String awsAccessKeyId = arguments.get("awsAccessKeyId", SampleUtil.getConfig("awsAccessKeyId"));
-            String awsSecretAccessKey = arguments.get("awsSecretAccessKey", SampleUtil.getConfig("awsSecretAccessKey"));
-            String sessionToken = arguments.get("sessionToken", SampleUtil.getConfig("sessionToken"));
-
-            if (awsAccessKeyId != null && awsSecretAccessKey != null) {
-                awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey,
-                        sessionToken);
-            }
-        }
-
-        if (awsIotClient == null) {
-            throw new IllegalArgumentException("Failed to construct client due to missing certificate or credentials.");
-        }
-    }
-
-    public static void main(String args[]) throws InterruptedException, AWSIotException, AWSIotTimeoutException {
-        String clientEndpoint = "a2awmps9ermju9.iot.us-east-1.amazonaws.com";
-        String clientId = "187e4";
-
-
-        String awsAccessKeyId = "ASIAJTEG4GVPTEV47G3A";
-        String awsSecretAccessKey = "woWVvnvSuaDxEEH7ySl/ID3ivUvkPVeOFdUMj1QY";
-        String sessionToken = "FQoDYXdzELr//////////wEaDBlsIFf114xEt0xI/SLmAxfNWEqhCzO6e7GW5mOHSKfqLpx2pN1om88JQxA3XsQDZMeJVS/iGvd85AIMAI3IS3quiNH2CCx42wpkkGnUuY5rmen5AM9HJXYjIeyxElcZBkoVVIYcMaxpy8HK2a0979nmZnTAFwdp5x0xd9pXO3fYkGM8HrBAhEPikU52O7ktEzo92fp2SxHDlt1YIzyo8obVsNeRM2bO9k0FJQJy53dysfpUCogDlE747/BEKhrR9aOtsIKPP/+/fLF0O1GGql1KJLAXGcD1Q6c/zs+vh7Q+ZukOPv97N84sGb2EMzyki+WVjAIxRLzsnSak1va0OOwK4hfbNQ8Lgk6Wbbhr8KMBF7nSA2U7CCrTrIo+wT4PbTJr4knVRVvHVQMaKAQ9SRX1pukZ9mtNmLlCinPka8z/xAf1ftWmNCuPekdqKG1H95KASWwTwBgFCgfodIZuHFaYpYHWY0GVBFRtlA9nBiJA+YC9xozbRN5TMc0V/lY0Y/So/gCPW2jgkftWwRFvASzWsV6f3qROr0l0BZdJitLPKNUoMzKdRWw99SwVWt0kXjGk4ePxSd2Unwrj6SuB7Ij17EPpBePxCRPiYxZTvk/stzaQxNI/kXgb8qE7so+VJBFimTNC3Ra8iQovW+a40pzQJOq/WSjohb3HBQ==";
-
-
-//        CommandArguments arguments = CommandArguments.parse(args1);
-//        initClient(arguments);
-
-        awsIotClient = new AWSIotMqttClient(clientEndpoint, clientId, awsAccessKeyId, awsSecretAccessKey, sessionToken);
-
-        awsIotClient.connect();
-
-        AWSIotTopic topic = new TestTopicListener(TestTopic, TestTopicQos);
-        awsIotClient.subscribe(topic, true);
-
-        Thread blockingPublishThread = new Thread(new BlockingPublisher(awsIotClient));
-        Thread nonBlockingPublishThread = new Thread(new NonBlockingPublisher(awsIotClient));
-
-        blockingPublishThread.start();
-        nonBlockingPublishThread.start();
-
-        blockingPublishThread.join();
-        nonBlockingPublishThread.join();
     }
 
 }

@@ -19,13 +19,13 @@ public class Variables {
     //find all *.json
     //return list of paths to all *.json
 
+    private static HashMap<String, String> urls = null;
+    private static HashMap<String, String> equips = null;
     //read json file
     //check if json file contains stage which equals stage
     //if yes
     //if true
     private final String pathToFolder = "variables";
-    private static HashMap<String, String> urls = null;
-    private static HashMap<String, String> equips = null;
 
     public void findAndAssembleStage(String stage) {
         findStageJson(stage);
@@ -45,11 +45,15 @@ public class Variables {
         assembledEquipments.setEquipmentVpvChannel(equips.get("equipmentVpvChannel"));
         assembledEquipments.setEquipmentVpvChartType(equips.get("equipmentVpvChartType"));
         assembledEquipments.setEquipmentVpvData(equips.get("equipmentVpvData"));
-        assembledEquipments.setEquipmentItcName1(equips.get("equipmentItcName1"));
-        assembledEquipments.setEquipmentItcName2(equips.get("equipmentItcName2"));
-        assembledEquipments.setEquipmentItcName3(equips.get("equipmentItcName3"));
-        assembledEquipments.setEquipmentItcName4(equips.get("equipmentItcName4"));
-        assembledEquipments.setEquipmentItcName5(equips.get("equipmentItcName5"));
+        assembledEquipments.setIctDatastream(equips.get("equipmentIctAnyDataStreamId"));
+        assembledEquipments.setIctTopic(equips.get("equipmentIctTopic"));
+        assembledEquipments.setIctId(equips.get("equipmentIctId"));
+        assembledEquipments.setIctFgwSimulator(equips.get("equipmentIctFgwSimulator"));
+        assembledEquipments.setEquipmentItcName1(equips.get("equipmentIctName1"));
+        assembledEquipments.setEquipmentItcName2(equips.get("equipmentIctName2"));
+        assembledEquipments.setEquipmentItcName3(equips.get("equipmentIctName3"));
+        assembledEquipments.setEquipmentItcName4(equips.get("equipmentIctName4"));
+        assembledEquipments.setEquipmentItcName5(equips.get("equipmentIctName5"));
     }
 
     private void assembleUrls() {

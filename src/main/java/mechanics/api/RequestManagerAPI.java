@@ -42,6 +42,23 @@ public class RequestManagerAPI extends JSONManagerAPI {
         messagesEnableGatlingReport = false;
     }
 
+    public String getYieldInPeriodValue(String equipmentId){
+        Response response = sendAmazonRequest(GET.getValue(), AssembledUrls.apiUrl+"chart/"+equipmentId+"?timeType=day");
+        return getYieldInPeriod(response.asString());
+    }
+
+    public String getLastYieldPointValue(String equipmentId){
+        Response response = sendAmazonRequest(GET.getValue(), AssembledUrls.apiUrl+"chart/"+equipmentId+"?timeType=day");
+        return getLastYieldPoint(response.asString());
+    }
+
+    public Response hardDeleteUser(String email, String role){
+        Response response = sendAmazonRequest(GET.getValue(), AssembledUrls.userList);
+        String userId = new JSONHandler().getUserIdFromUserList(response.asString(), email, role);
+        String body = "{ \"id\":\""+userId+"\", \"isHardDelete\": true }";
+        return sendAmazonRequest(DELETE.getValue(), AssembledUrls.user, body);
+    }
+
 
     public Response getGlobalSettings() {
         Response response = sendAmazonRequest(GET.getValue(), AssembledUrls.globalSettings);
@@ -349,7 +366,7 @@ public class RequestManagerAPI extends JSONManagerAPI {
         if (!response.asString().contains("error") && !response.asString().contains("exception") && !response.asString().contains("expired\"") && !response.asString().contains("timed out")) {
             Assert.assertTrue(true);
         } else {
-            if (response.asString().contains("\"expired\":false") || response.asString().contains("\"expired\":true,\"accessKeyId\"") || response.asString().contains("Dashboards list is empty")) {
+            if (response.asString().contains("\"expired\":false") || response.asString().contains("\"expired\":true,\"accessKeyId\"") || response.asString().contains("Dashboards list is empty")|| response.asString().contains("No notifications to delete")) {
                 Assert.assertTrue(true);
             } else {
                 Assert.assertTrue(false);
@@ -363,7 +380,7 @@ public class RequestManagerAPI extends JSONManagerAPI {
         if (!response.asString().contains("error") && !response.asString().contains("exception") && !response.asString().contains("expired") && !response.asString().contains("timed out")) {
             softAssert.assertTrue(true);
         } else {
-            if (response.asString().contains("\"expired\":false") || response.asString().contains("\"expired\":true,\"accessKeyId\"") || response.asString().contains("Dashboards list is empty")) {
+            if (response.asString().contains("\"expired\":false") || response.asString().contains("\"expired\":true,\"accessKeyId\"") || response.asString().contains("Dashboards list is empty") || response.asString().contains("No notifications to delete")) {
                 softAssert.assertTrue(true);
             } else {
                 softAssert.assertTrue(false);

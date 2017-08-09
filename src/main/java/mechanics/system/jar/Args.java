@@ -13,33 +13,27 @@ import java.util.List;
  * Created by Alex Storm on 16.05.2017.
  */
 public class Args {
-    @Parameter
-    private List<String> parameters = new ArrayList<>();
-
     @Parameter(names = {"-stage", "-s"}, description = "Environment to test: dev/stage/other")
     public static String stage = "dev";
-
     @Parameter(names = {"-file", "-f"}, description = "Test suite .xml file in xml/ folder")
 //    public static String file = "api.xml";
-    public static String file = "ui.xml";
-
+    public static String file = "fortest.xml";
     @Parameter(names = {"-browser", "-b"}, description = "Browser name for selenium")
     public static String browser = "chrome";
-
     @Parameter(names = {"-grid", "-g"}, description = "Use selenium grid?")
     public static boolean grid = false;
-
     @Parameter(names = {"-role", "-r"})
 //    public static List<String> role = Arrays.asList("system_admin","admin","regular","amazon_regular");
     public static List<String> role = Arrays.asList("system_admin");
-
-    @Parameter(names = {"-help", "-h"}, help = true)
-    private boolean help;
-
     @Parameter(names = {"-noInit"})
     public static boolean noInit = false;
+    @Parameter(names = {"-unpackOnly"})
+    public static boolean unpackOnly = false;
+    @Parameter
+    private List<String> parameters = new ArrayList<>();
+    @Parameter(names = {"-help", "-h"}, help = true)
+    private boolean help;
 //    public static boolean noInit = true;
-
 
     public void help() {
         if (help) {
@@ -49,6 +43,7 @@ public class Args {
             System.out.println("'-g' or '-grid'    - with value 'true' enables selenium grid connection, default is false");
             System.out.println("'-r' or '-role'    - sets role/roles which will be userd for tests (system_admin/admin/regular), by default all roles will be used");
             System.out.println("'-h' or '-help'    - displays this message");
+            System.out.println("'-unpackOnly'      - unpack files required for correct start of these tests");
             System.out.println("example of launch command: java -javaagent:aspectjweaver.jar -jar iot-auto-fat.jar -s wstaging -f api.xml -r system_admin,regular");
             System.exit(0);
         }
@@ -56,8 +51,7 @@ public class Args {
 
 
     public void setStage() {
-        Variables variables = new Variables();
-        variables.findAndAssembleStage(stage);
+        new Variables().findAndAssembleStage(stage);
     }
 
     public void setRoles() {

@@ -56,7 +56,7 @@ public class DashboardsCRUD {
         //click dashboard in main menu
         mainMenu.clickDashboardInMenu();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click floatingbutton at dashboard list
         dashboardList.clickFloatingButton();
         //click create vpv canvas dashboard
@@ -76,7 +76,7 @@ public class DashboardsCRUD {
         //click save button
         dashboardList.creationClickSave();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click 3 dot menu on first item in dashboards list
         dashboardList.clickDashboardMenu(dashName);
         //click delete in appeared menu
@@ -101,7 +101,7 @@ public class DashboardsCRUD {
         //click dashboard in main menu
         mainMenu.clickDashboardInMenu();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click floatingbutton at dashboard list
         dashboardList.clickFloatingButton();
         //click create vpv canvas dashboard
@@ -121,7 +121,7 @@ public class DashboardsCRUD {
         //click save button
         dashboardList.creationClickSave();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click 3 dot menu on first item in dashboards list
         dashboardList.clickDashboardMenu(dashName);
         //click delete in appeared menu
@@ -146,7 +146,7 @@ public class DashboardsCRUD {
         //click dashboard in main menu
         mainMenu.clickDashboardInMenu();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click floatingbutton at dashboard list
         dashboardList.clickFloatingButton();
         //click create vpv canvas dashboard
@@ -166,7 +166,7 @@ public class DashboardsCRUD {
         //click save button
         dashboardList.creationClickSave();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click 3 dot menu on first item in dashboards list
         dashboardList.clickDashboardMenu(dashName);
         //click delete in appeared menu
@@ -191,7 +191,7 @@ public class DashboardsCRUD {
         //click dashboard in main menu
         mainMenu.clickDashboardInMenu();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click floatingbutton at dashboard list
         dashboardList.clickFloatingButton();
         //click create vpv canvas dashboard
@@ -211,7 +211,7 @@ public class DashboardsCRUD {
         //click save button
         dashboardList.creationClickSave();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click 3 dot menu on first item in dashboards list
         dashboardList.clickDashboardMenu(dashName);
         //click delete in appeared menu
@@ -236,7 +236,7 @@ public class DashboardsCRUD {
         //click dashboard in main menu
         mainMenu.clickDashboardInMenu();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click floatingbutton at dashboard list
         dashboardList.clickFloatingButton();
         //click create vpv canvas dashboard
@@ -256,7 +256,7 @@ public class DashboardsCRUD {
         //click save button
         dashboardList.creationClickSave();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click 3 dot menu on first item in dashboards list
         dashboardList.clickDashboardMenu(dashName);
         //click delete in appeared menu
@@ -281,7 +281,7 @@ public class DashboardsCRUD {
         //click dashboard in main menu
         mainMenu.clickDashboardInMenu();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click floatingbutton at dashboard list
         dashboardList.clickFloatingButton();
         //click create vpv canvas dashboard
@@ -301,7 +301,7 @@ public class DashboardsCRUD {
         //click save button
         dashboardList.creationClickSave();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click 3 dot menu on first item in dashboards list
         dashboardList.clickDashboardMenu(dashName);
         //click delete in appeared menu
@@ -326,7 +326,7 @@ public class DashboardsCRUD {
         //click dashboard in main menu
         mainMenu.clickDashboardInMenu();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click floatingbutton at dashboard list
         dashboardList.clickFloatingButton();
         //click create vpv canvas dashboard
@@ -346,7 +346,7 @@ public class DashboardsCRUD {
         //click save button
         dashboardList.creationClickSave();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click 3 dot menu on first item in dashboards list
         dashboardList.clickDashboardMenu(dashName);
         //click delete in appeared menu
@@ -371,7 +371,7 @@ public class DashboardsCRUD {
         //click dashboard in main menu
         mainMenu.clickDashboardInMenu();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click floatingbutton at dashboard list
         dashboardList.clickFloatingButton();
         //click create vpv canvas dashboard
@@ -384,14 +384,13 @@ public class DashboardsCRUD {
         dashboardList.creationClickContinue();
         //click green plus on table to add equipment
         dashboardList.creationAddEquipment();
-        //select second equip, which currently is a pump d11
-        dashboardList.creationSelectICTEquips();
+        dashboardList.creationSelect1ICTEquip();
         //click add
         dashboardList.creationAddSelectedEquip();
         //click save button
         dashboardList.creationClickSave();
         //click cogwheel button at dashboard page
-        dashboard.clickCogwheelButton();
+        dashboard.clickCogwheelButtonIfExists();
         //click 3 dot menu on first item in dashboards list
         dashboardList.clickDashboardMenu(dashName);
         //click delete in appeared menu

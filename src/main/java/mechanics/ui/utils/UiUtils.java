@@ -39,8 +39,7 @@ public class UiUtils {
     public String getTime() {
         DateFormat dateFormat = new SimpleDateFormat("(dd.MM.yyyy) HH-mm-ss");
         Date date = new Date();
-        String today = dateFormat.format(date);
-        return today;
+        return dateFormat.format(date);
     }
 
     public boolean checkActiveCSS(WebDriver driver, String css) {
@@ -62,14 +61,14 @@ public class UiUtils {
         }
         r.keyPress(KeyEvent.VK_ENTER);
         r.keyRelease(KeyEvent.VK_ENTER);
-        waitsAsserts.sleep(500);
+        sleep(500);
     }
 
     //check expected condition (true/false) and if css presented or not click xpath or not
     public void checkDefaultItem(WebDriver driver, String cssActive, String cssButton, boolean expectedStatus) {
         WaitsAsserts waitsAsserts = new WaitsAsserts();
         //String menuButton = "//*[@id=\"table_menu_btn\"]";
-        waitsAsserts.sleep(700);
+        sleep(700);
         if (isDDMenuOpen(driver)) {
             System.out.println("Menu is open, performing check");
         } else {
@@ -78,7 +77,7 @@ public class UiUtils {
         if (checkActiveCSS(driver, cssActive) != expectedStatus) {
             System.out.println("Status is not as expected, clicking on: " + cssButton);
             driver.findElement(By.cssSelector(cssButton)).click();
-            waitsAsserts.sleep(700);
+            sleep(700);
         } else {
             System.out.println("Status corresponds to expected, doing nothing :" + cssButton);
         }
@@ -88,7 +87,7 @@ public class UiUtils {
         WaitsAsserts waitsAsserts = new WaitsAsserts();
         //String menuButton = "//*[@id=\"table_menu_btn\"]";
         //String menu = "body > div:nth-child(14) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1) > div:nth-child(1)";
-        waitsAsserts.sleep(700);
+        sleep(700);
         if (isDDMenuOpenFF(driver)) {
             System.out.println("Menu is open, performing check");
         } else {
@@ -98,7 +97,7 @@ public class UiUtils {
         if (checkActiveCSS(driver, cssActive) != expectedStatus) {
             System.out.println("Status is not as expected, clicking on: " + cssButton);
             driver.findElement(By.cssSelector(cssButton)).click();
-            waitsAsserts.sleep(700);
+            sleep(700);
         } else {
             System.out.println("Status corresponds to expected, doing nothing :" + cssButton);
         }
@@ -146,7 +145,7 @@ public class UiUtils {
     @Step
     public void recreateWebdriver() {
         try {
-            Thread.sleep(3500);
+            Thread.sleep(2500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -157,6 +156,7 @@ public class UiUtils {
             Boolean useGrid = Args.grid;
             driver = WebDriverFactory.createInstance(browserName, useGrid);
             WebDriverManager.setWebDriver(driver);
+            WaitsAsserts.sleep(2500);
         }
     }
 

@@ -23,19 +23,15 @@ public class RequestManagerLoad extends RequestTemplates {
     private static String idOfCreatedGPVDashboard = null;
 
     private static int equipCounter = 0;
-    private String idOfCreatedGPVDashboard100 = null;
-    private String thingGPV100 = "Thing-90" + new DecimalFormat("000").format(equipCounter) + "-0";
-
-
     private static String thingGPV = AssembledEquipments.equipmentGpv;
     private static String thingVPV = AssembledEquipments.equipmentVpv;
     private static String channelVPV = AssembledEquipments.equipmentVpvChannel;
-
     private static String chart = AssembledUrls.chart;
     private static String dashboard = AssembledUrls.dashboard;
     private static String notificationRule = AssembledUrls.notificationRule;
     private static String notificationUnread = AssembledUrls.notificationUnread;
-
+    private String idOfCreatedGPVDashboard100 = null;
+    private String thingGPV100 = "Thing-90" + new DecimalFormat("000").format(equipCounter) + "-0";
 
     public void getChart(int repeats, int timeBetweenRequests) {
         long startDate = 1490189802247L;

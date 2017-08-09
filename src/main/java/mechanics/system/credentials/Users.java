@@ -23,7 +23,6 @@ public class Users {
     }
 
     public static void initializeCreds() {
-//        List<String> roles = Args.role;
         List<String> roles = new ArrayList<>();
         roles.add("system_admin");
         roles.add("admin");
