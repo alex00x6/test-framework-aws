@@ -20,7 +20,11 @@ import static mechanics.system.constant.HTTPMethod.*;
  */
 public class RequestFactory {
 
-    public void setUpBaseApiGateway() {
+    public RequestFactory(){
+        setUpBaseApiGateway();
+    }
+
+    private void setUpBaseApiGateway() {
         SSLSocketFactory customSslFactory = null;
         try {
             customSslFactory = new GatewaySslSocketFactory(
